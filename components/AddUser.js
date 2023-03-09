@@ -1,16 +1,18 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext} from "react";
 import { AppContext } from "../context";
 
-function AddUser() {
-  
 
-  const {users, dispatchUser, editUser } = useContext(AppContext);
+function AddUser() {
+  const { dispatchUser, handleInputChange, handleEditUser } = useContext(AppContext);
+
   const [id, setId] = useState("");
   const [name, setName] = useState("");
   const [age, setAge] = useState("");
   const [bio, setBio] = useState("");
 
+
   const handleAddUser = () => {
+    // here below is the destructurize way of key:value pairs
     let user_credentials = {
       id,
       name,
@@ -23,16 +25,12 @@ function AddUser() {
     setName("");
     setAge("");
     setBio("");
-
-    console.log(users);
   };
 
-  const handleEditUser = () => {
-    // dispatchUser("Edit_User", { userId: editData.id });
-    editUser('2', "mukii", 20, "bhai");
-
-   
-  };
+  function disableInput() {
+    let target_input = document.getElementById("targetInput");
+    target_input.value = "";
+  }
 
   return (
     <div
@@ -47,10 +45,12 @@ function AddUser() {
         border: "2px solid black",
       }}
     >
+      {/* <input onChange={(e) => handleInputChange(e)} /> */}
+
       <div
         style={{
           width: "400px",
-          height: "100px",
+          height: "160px",
           border: "2px solid blue",
           marginBottom: "10px",
           marginLeft: "7%",
@@ -64,12 +64,12 @@ function AddUser() {
             textDecoration: "underline",
           }}
         >
-          Enter Your Identification Number:
+          Enter Your Id Below:
         </label>
 
         <input
           style={{
-            fontSize: "20px",
+            fontSize: "22px",
             width: "300px",
             height: "40px",
             border: "2px solid black",
@@ -84,14 +84,10 @@ function AddUser() {
         />
       </div>
 
-
-
-
-
       <div
         style={{
           width: "400px",
-          height: "100px",
+          height: "160px",
           border: "2px solid blue",
           marginBottom: "10px",
           marginLeft: "7%",
@@ -110,7 +106,7 @@ function AddUser() {
 
         <input
           style={{
-            fontSize: "20px",
+            fontSize: "22px",
             width: "300px",
             height: "40px",
             border: "2px solid black",
@@ -128,7 +124,7 @@ function AddUser() {
       <div
         style={{
           width: "400px",
-          height: "100px",
+          height: "160px",
           border: "2px solid blue",
           marginBottom: "10px",
           marginLeft: "7%",
@@ -147,7 +143,7 @@ function AddUser() {
 
         <input
           style={{
-            fontSize: "20px",
+            fontSize: "22px",
             width: "300px",
             height: "40px",
             border: "2px solid black",
@@ -165,7 +161,7 @@ function AddUser() {
       <div
         style={{
           width: "400px",
-          height: "100px",
+          height: "160px",
           border: "2px solid blue",
           marginBottom: "10px",
           marginLeft: "7%",
@@ -184,7 +180,7 @@ function AddUser() {
 
         <input
           style={{
-            fontSize: "20px",
+            fontSize: "22px",
             width: "300px",
             height: "40px",
             border: "2px solid black",
@@ -216,10 +212,25 @@ function AddUser() {
         Add User
       </button>
 
+      <input
+        id="targetInput"
+        style={{
+          fontSize: "22px",
+          width: "300px",
+          height: "40px",
+          border: "2px solid black",
+          borderRadius: "10px",
+          textIndent: "10px",
+          margin: "10px 20%",
+        }}
+        type="text"
+        onChange={(e) => handleInputChange(e)}
+        placeholder="Enter Your Friend Name:"
+      />
       <button
         style={{
           color: "white",
-          backgroundColor: "black",
+          backgroundColor: "grey",
           textAlign: "center",
           fontSize: "25px",
           cursor: "pointer",
@@ -227,11 +238,10 @@ function AddUser() {
           height: "40px",
           borderRadius: "15px",
           marginLeft: "20%",
-          marginTop: "10px",
         }}
-        onClick={handleEditUser}
+        onClick={disableInput}
       >
-        Edit User
+        Finish
       </button>
     </div>
   );
